@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import '../styles/Register.css'
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function Register() {
+  document.title='REGISTER'
+
   // const [data,setData]=useState({
   //   email:'',
   //   password:'',
@@ -19,17 +21,17 @@ export default function Register() {
   const [last_name,setlastname]=useState('')
   const [phone_number,setphonenumber]=useState('')
   const [password,setPassword]=useState('')
-
+  const [Cpassword,setCpassword] = useState('')
   const navigate = useNavigate()
-  const [Cpassword,setCpassword]=useState('');
   
   
-  const RegisterForm = async (e)=>{
+  
+  const RegisterForm =  (e)=>{
       e.preventDefault()
-      // if(password===Cpassword){
+     
         try {
           console.log(email,password)
-          const res =await api.post('/api/user/register/',{
+          const res = api.post('/api/user/register/',{
                 'email':email,
                 'password':password,
                 'first_name':first_name,
@@ -42,20 +44,22 @@ export default function Register() {
             },
           }
           ).then((response)=>console.log(response.data)).catch((error)=>alert(error.message))
-          // if(res.status===201){
+          if(res.status===201){
+  
+              navigate('/login')
+              
+          
+        }else{
+  
+          return <div class="alert alert-danger" role="alert">
+          passwords didnt match
+        </div>
+      }
 
-            navigate('/login')
-            // }
         } catch (error) {
+          console.log(error)
           alert(error)
         }
-        
-    //   }else{
-
-    //     return <div class="alert alert-danger" role="alert">
-    //     passwords didnt match
-    //   </div>
-    // }
       }
   return (
     <div className='container'>
@@ -71,6 +75,7 @@ export default function Register() {
                   <input type="text" 
                   value={first_name}
                   onChange={(e)=>setfirstname(e.target.value)}
+                  name='first name'
                   placeholder="first name" 
                   className='form-control'/>
                 </div>
@@ -78,25 +83,29 @@ export default function Register() {
                 <div className='form-group'>
                   <input type="text" 
                   value={middle_name}
-                  onChange={(e)=>{(e)=>setmiddlename(e.target.value)}}
+                  name='middle name'
+                  onChange={(e)=>setmiddlename(e.target.value)}
                   placeholder="middle name" className='form-control'/>
                 </div>
 
                 <div className='form-group'>
                   <input type="text" 
                   value={last_name}
+                  name='last name'
                   onChange={(e)=>setlastname(e.target.value)}
                   placeholder="last name" className='form-control'/>
                 </div>
 
                 <div className='form-group'>
-                  <input type="text" 
+                  <input type="email" 
                   value={email}
+                  name = 'email'
                   onChange={(e)=>setEmail(e.target.value)}
                   placeholder='email' className='form-control'/>
                 </div>
                 <div className='form-group'>
-                  <input type="text" 
+                  <input type="text"
+                  name='phone number' 
                   value={phone_number}
                   onChange={(e)=>setphonenumber(e.target.value)}
                   placeholder='phone number' className='form-control'/>
@@ -104,6 +113,7 @@ export default function Register() {
 
                 <div className='form-group'>
                   <input type="password"
+                  name='password'
                   value={password}
                   onChange={(e)=>setPassword(e.target.value)}
                   placeholder='password' className='form-control'/>

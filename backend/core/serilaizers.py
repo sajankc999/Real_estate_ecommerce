@@ -5,8 +5,10 @@ from .models import Property
 
 
 class PropertySerializer(serializers.ModelSerializer):
+    seller = serializers.HiddenField(default = serializers.CurrentUserDefault())
+    image = serializers.ImageField(required=False)
     class Meta:
         model = Property
-        fields ='__all__'
-        extra_kwargs ={'seller':{'read_only':True}}
+        fields =['id','title','description','price','image','location','is_negotiable','is_available','seller']
+        # extra_kwargs ={'seller':{'read_only':True}}
         

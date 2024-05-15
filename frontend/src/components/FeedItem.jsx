@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-export default function FeedItem({title,description,image,price,buttonFunc,btnName,id}) {
+import PropDetail from './PropDetail';
+export default function FeedItem({title,description,image,price,is_negotiable,is_available}) {
     const [isShown,setisShown]=useState(false)
 
  
@@ -16,9 +17,13 @@ export default function FeedItem({title,description,image,price,buttonFunc,btnNa
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{description}</p>
                     <p className="card-text">{price}</p>
-                    <button className="btn btn-primary" onClick={()=>{btnName==='delete' && buttonFunc(id)}}>
-                        {btnName}
-                    </button>
+                    <PropDetail title={title} 
+                    description={description} 
+                    price={price} 
+                    img={image} 
+                    is_available={is_available}
+                    is_negotiable={is_negotiable}
+                    />
                 </div>
             </div>
         </div>

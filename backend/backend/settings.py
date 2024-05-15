@@ -1,3 +1,4 @@
+import os
 
 
 from pathlib import Path
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'authUser',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -91,7 +93,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
 }
 
 # Password validation
@@ -138,3 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
+
+# URL used to access the media
+MEDIA_URL = '/media/'

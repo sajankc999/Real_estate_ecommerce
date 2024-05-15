@@ -5,6 +5,7 @@ import api from '../api';
 import { useNavigate ,Link} from 'react-router-dom';
 
 export default function Feed() {
+  document.title = 'Home'
   const navigate = useNavigate()
   const [property,setProperty]=useState([])
   const [filtered_data,setFiltered_data]= useState([]);
@@ -26,8 +27,11 @@ export default function Feed() {
           })
           .catch((err) => alert(err));
   };
-  useEffect(()=>{getProperty()},[])
+  useEffect(()=>{getProperty();
+    // console.log(property.image)
+  },[])
   return (
+
     <>
     <div className='bg-primary'>
 
