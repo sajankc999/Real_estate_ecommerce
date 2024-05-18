@@ -1,56 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import api from '../api'
-import FeedItem from '../components/FeedItem'
+import DashBoardItem from '../components/DashBoardItem'
 import navigate from '../components/Form'
+import {Link} from 'react-router-dom'
+import DeleteProp from '../components/DeleteProp'
 export default function Dashboard() {
-    
-    const [MyPropery, setMyProperty] = useState([])
+    document.title='Dashboard'
+    const [MyProperty, setMyProperty] = useState([])
     const getMYProperty = () => {
         api
             .get('api/property/MyProperty/')
             .then((res) => res.data).then((data) => setMyProperty(data))
             .catch((err) => { alert(err) })
     }
-    const DltFunc=(id)=>{
-        api
-        .delete(`api/property/MyProperty/delete/${id}/`)
-        .then((res)=>{
-            if (res.status===204) alert('item deleted')
-            else alert('couldnt delete property')
-        }).catch((err)=>alert(err))
-        getMYProperty();
-    }
+   
 
     useEffect(() => {
         getMYProperty();
     }, [])
     
     return (
-        <div className='container my-3'>
-            <div className='col-md-5'>
-                <h1>
-                    DashBoard
-                </h1>
-                <div className='col'>
+        <>
+        <h1>
+            DashBoard
+        </h1>
+        <Link to ='/property/add'>
+        <button style={
+            {
+                top:'5%',
+                left:'91%',
+                width:'85px',
+                height:'35px',
+                position: 'absolute',
+                zIndex: '2',
+                background: 'orange',
+                }
+        } type='button'>add
+            </button>
+            </Link>
+
+        
+                <div cclassName='row row-cols-1 row-cols-md-2 g-4'>
                     {
-                        MyPropery?(MyPropery.map((item) => {
+                        MyProperty.length!==0?(MyProperty.map((item) => {
                             return <div key={item.id}>
 
-                                <FeedItem
+                                <DashBoardItem
                                     id ={item.id}
                                     title={item.title}
                                     description={item.description}
                                     image={item.image}
                                     price={item.price}
-                                    buttonFunc={DltFunc}
-                                    btnName='delete' />
+                                    
+                                     />
                             </div>
                         }
-                        )):   <h5>Your Properties will apper here</h5>
+                        )):  <center><h5>Your Properties will apper here</h5></center> 
                     }
                 </div>
 
-            </div>
-        </div>
+           
+        </>
     )
 }

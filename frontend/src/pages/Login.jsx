@@ -5,6 +5,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
 import { Link, useNavigate } from 'react-router-dom';
 import "../styles/Login.css"
 export default function Login() {
+  document.title ='Login'
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -13,16 +14,17 @@ export default function Login() {
     e.preventDefault()
     try {
       
-      const res = await api.post('/api/token/', { email, password })
+      const res = await api.post('/api/token/', { email, password }).catch((err)=>console.log(err))
       localStorage.setItem(ACCESS_TOKEN, res.data.access)
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
-      console.log(res.data.access )
-      navigate('/')
+      // console.log(res.data.access )
+      navigate('/feed')
       
 
      
     } catch (error) {
-      alert(error)
+      console.log(error)
+      alert(error  )
     }
   }
   return (
@@ -34,15 +36,12 @@ export default function Login() {
             <div className="card-body py-md-4">
               <form onSubmit={formHandler} >
                 <div className='form-group'>
-
                   <input type="email" value={email}
                     onChange={(e) => setemail(e.target.value)}
                     placeholder='email'
                     className='form-control' />
                 </div>
-
                 <div className='form-group'>
-
                   <input type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -51,14 +50,12 @@ export default function Login() {
                 </div>
                 <div className='d-flex flex-row align-items-center justify-content-between'>
                   <div>
-
-                    <span><p>dont have an id?</p></span>
+                    <span><p>don't have an id?</p></span>
                     <Link to='/register'>register</Link>
                   </div>
                   <button type='submit'>login</button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
@@ -66,3 +63,4 @@ export default function Login() {
     </div>
   )
 }
+

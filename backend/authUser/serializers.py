@@ -9,5 +9,7 @@ class Userserializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         # raise Exception(validated_data['email'])
+        if User.objects.filter(email = validated_data['email']).first():
+            return serializers.ValidationError('email already used')
         user = User.objects.create_user(**validated_data)
         return user

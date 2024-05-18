@@ -13,7 +13,7 @@ export default function Form({ route, method }) {
       if (method === 'login') {
         localStorage.setItem(ACCESS_TOKEN, result.data.access)
         localStorage.setItem(REFRESH_TOKEN, result.data.refresh)
-        navigate("/")
+        navigate("/feed")
 
       } else {
         navigate('/register')
