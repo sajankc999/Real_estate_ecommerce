@@ -4,6 +4,8 @@ import { useState } from 'react';
 import api from '../api';
 import { useNavigate ,Link} from 'react-router-dom';
 
+import NavBar from '../components/Navbar';
+
 export default function Feed() {
   document.title = 'Home'
   const navigate = useNavigate()
@@ -33,14 +35,15 @@ export default function Feed() {
   return (
 
     <>
+      
     <div className='bg-primary'>
 
-      <h1>REAL STATE NEAR YOU</h1> 
-      <div className="position-absolute top-0 end-0">
+      {/* <h1>REAL STATE NEAR YOU</h1>  */}
+      {/* <div className="position-absolute top-0 end-0">
         <button > <Link to="/dashboard">My property</Link>
         </button>
-      </div>
-
+      </div> */}
+    <NavBar/>
     </div>
       <div className='text-center'>
       <input onChange={e=>handleInput(e.target.value)} placeholder='search' />

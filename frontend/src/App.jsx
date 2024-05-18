@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound"
 import Dashboard from "./pages/Dashboard"
 import AddProperty from "./pages/AddProperty"
 import UpdateProperty from "./pages/UpdateProperty";
+import Home from "./pages/Home";
 function App() {
 
 
@@ -21,7 +22,7 @@ function App() {
     
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={
+      <Route path='/feed' element={
         <ProtectedRoutes>
           <Feed/>
         </ProtectedRoutes>
@@ -31,11 +32,25 @@ function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<RegisterAndLogout/>} />
       <Route path="/logout" element={<Logout/>} />
-      
-      <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/" element={<Home/>} />
+      <Route path="/dashboard" element={
+        <ProtectedRoutes>
+            <Dashboard/>
+        </ProtectedRoutes>
+      } />
       <Route path="*" element={<NotFound/>} />
-      <Route path="/property/add" element={<AddProperty/>}/>
-      <Route path="/property/update/:id" element={<UpdateProperty/>}/>
+      <Route path="/home" element={<Home/>} />
+      <Route path="/property/add" element={
+        <ProtectedRoutes>
+
+          <AddProperty/>
+        </ProtectedRoutes>
+      }/>
+      <Route path="/property/update/:id" element={
+      <ProtectedRoutes>
+        <UpdateProperty/>
+      </ProtectedRoutes>
+      }/>
       </Routes>
     </BrowserRouter>
     

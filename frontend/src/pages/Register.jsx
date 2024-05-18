@@ -26,12 +26,12 @@ export default function Register() {
   
   
   
-  const RegisterForm =  (e)=>{
+  const RegisterForm = async (e)=>{
       e.preventDefault()
      
         try {
           console.log(email,password)
-          const res = api.post('/api/user/register/',{
+          const res = await api.post('/api/user/register/',{
                 'email':email,
                 'password':password,
                 'first_name':first_name,

@@ -12,7 +12,7 @@ export default function FeedItem({title,description,image,price,is_negotiable,is
             {/* {ispressed?<PopupAlert/>:null} */}
         <div className='container my-3'>
             <div className="card h-100"  >
-                <img src={image?image:'https://th.bing.com/th/id/OIP.kgfkdioyvqIrLPdA5bXckAHaE8?rs=1&pid=ImgDetMain'} className="card-img-top" alt="..." />
+                <img src={image?image:'https://th.bing.com/th/id/OIP.kgfkdioyvqIrLPdA5bXckAHaE8?rs=1&pid=ImgDetMain'} className="card-img-top" style={{width:"220px",height:'150px'}} alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{description}</p>

@@ -18,7 +18,7 @@ export default function Login() {
       localStorage.setItem(ACCESS_TOKEN, res.data.access)
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
       // console.log(res.data.access )
-      navigate('/')
+      navigate('/feed')
       
 
      
