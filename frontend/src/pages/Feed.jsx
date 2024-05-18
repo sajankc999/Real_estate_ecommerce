@@ -48,13 +48,13 @@ export default function Feed() {
       <div className='text-center'>
       <input onChange={e=>handleInput(e.target.value)} placeholder='search' />
     </div>
-        <div className='container my-2'>
-      <div className='row'>
+        
+      <div className='row row-cols-1 row-cols-md-2 g-4'>
         {console.log(property)}
         {property.map(
           (prop)=>{
             return(
-              <div key={prop.id} className='col-md-3'>
+              <div key={prop.id} >
                 <FeedItem title={prop.title} 
                 description={prop.description} 
                 image={prop.image} 
@@ -64,7 +64,7 @@ export default function Feed() {
           }
         )}
         </div>
-      </div>
+      
     </>
   )
 }

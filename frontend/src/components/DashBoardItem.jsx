@@ -10,7 +10,7 @@ export default function DashBoardItem({ title, description, image, price, id }) 
         <>
             {/* {isShown && <AlertModal setisShown={setisShown}/>} */}
             {/* {ispressed?<PopupAlert/>:null} */}
-            <div className='container my-3'>
+            <div className='col'>
                 <div className="card h-100"  >
                     <img src={image ? image : 'https://th.bing.com/th/id/OIP.kgfkdioyvqIrLPdA5bXckAHaE8?rs=1&pid=ImgDetMain'} className="card-img-top" alt="..." />
                     <div className="card-body">

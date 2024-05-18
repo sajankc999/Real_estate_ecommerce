@@ -39,9 +39,8 @@ export default function Dashboard() {
             </button>
             </Link>
 
-        <div className='container my-3'>
-            <div className='col-md-5'>
-                <div className='col-md-16'>
+        
+                <div cclassName='row row-cols-1 row-cols-md-2 g-4'>
                     {
                         MyProperty.length!==0?(MyProperty.map((item) => {
                             return <div key={item.id}>
@@ -60,8 +59,7 @@ export default function Dashboard() {
                     }
                 </div>
 
-            </div>
-        </div>
+           
         </>
     )
 }
