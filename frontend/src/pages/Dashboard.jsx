@@ -27,7 +27,7 @@ export default function Dashboard() {
         <Link to ='/property/add'>
         <button style={
             {
-                top:'5%',
+                top:'3%',
                 left:'91%',
                 width:'85px',
                 height:'35px',
@@ -40,7 +40,7 @@ export default function Dashboard() {
             </Link>
 
         
-                <div cclassName='row row-cols-1 row-cols-md-2 g-4'>
+                <div className='row row-cols-1 row-cols-md-2 g-4'>
                     {
                         MyProperty.length!==0?(MyProperty.map((item) => {
                             return <div key={item.id}>

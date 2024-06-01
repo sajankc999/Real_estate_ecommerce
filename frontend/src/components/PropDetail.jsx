@@ -39,7 +39,7 @@ function PropDetail({title,description,img,price, is_available,is_negotiable}) {
             {description}
           </p>
           <div className={is_available?'text-success':'text-danger'}>{is_available?<P>Available</P>: <p>Not Available</p> }</div>
-          <div className={is_negotiable?'text-body-none':'text-decoration-line-through'}>Negotiable</div>
+          <div className={is_negotiable?'text-body-none text-success':'text-decoration-line-through text-danger'}>Negotiable</div>
         </Modal.Body>
       </Modal>
     </>

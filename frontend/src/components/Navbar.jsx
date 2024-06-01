@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
-
+import { ACCESS_TOKEN } from '../constants';
 function NavBar() {
   const expand=false
    
@@ -31,6 +31,8 @@ function NavBar() {
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link as={Link} to="/feed">Home</Nav.Link>
                   <Nav.Link as={Link} to="/dashboard">My property</Nav.Link>
+                  <Nav.Link as={Link} to="/logout" className={!localStorage.getItem(ACCESS_TOKEN)?'disabled':''}>Logout
+                  </Nav.Link>
                  
                 </Nav>
                 {/* <Form className="d-flex">
