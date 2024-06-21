@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
 from .models import *
 from django.contrib.auth import get_user_model
 from rest_framework.viewsets import generics,ModelViewSet
@@ -17,8 +15,8 @@ class PropertyView(generics.ListAPIView):
     serializer_class = PropertySerializer
     permission_classes =[IsAuthenticated]
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
-    # parser_classes = (MultiPartParser, FormParser)
-
+    parser_classes = (MultiPartParser, FormParser)
+    
     search_fields = ['price', 'title']
     ordering_fields = ['price', 'title']
 
@@ -33,6 +31,7 @@ class PropertyDeleteView(generics.DestroyAPIView)  :
 
 class PropertyUserView(ModelViewSet):
     # queryset = Property.objects.all()
+    # lookup_field='slug'
     serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated,]
     parser_classes = (MultiPartParser, FormParser)
