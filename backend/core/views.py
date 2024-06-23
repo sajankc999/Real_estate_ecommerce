@@ -31,7 +31,7 @@ class PropertyDeleteView(generics.DestroyAPIView)  :
 
 class PropertyUserView(ModelViewSet):
     # queryset = Property.objects.all()
-    # lookup_field='slug'
+    lookup_field='slug'
     serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated,]
     parser_classes = (MultiPartParser, FormParser)

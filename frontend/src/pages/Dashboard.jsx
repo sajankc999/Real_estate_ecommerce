@@ -33,7 +33,7 @@ export default function Dashboard() {
                 height:'35px',
                 position: 'absolute',
                 zIndex: '2',
-                background: 'orange',
+                background: 'green',
                 }
         } type='button'>add
             </button>
@@ -46,7 +46,7 @@ export default function Dashboard() {
                             return <div key={item.id}>
 
                                 <DashBoardItem
-                                    id ={item.id}
+                                    slug ={item.slug}
                                     title={item.title}
                                     description={item.description}
                                     image={item.image}

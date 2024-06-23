@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import api from '../api'
 import DeleteProp from './DeleteProp'
 import UpdateProperty from '../pages/UpdateProperty'
-export default function DashBoardItem({ title, description, image, price, id }) {
+export default function DashBoardItem({ title, description, image, price,slug }) {
 
    
     return (
@@ -19,8 +19,8 @@ export default function DashBoardItem({ title, description, image, price, id }) 
                         <p className="card-text">{price}</p>
                         <div className="d-flex justify-content-between">
 
-                            <Link to={`/property/update/${id}`} className='btn btn-info btn-sm text-decoration-none'>Update</Link>
-                            <DeleteProp id={id}/>
+                            <Link to={`/property/update/${slug}`} className='btn btn-info btn-sm text-decoration-none'>Update</Link>
+                            <DeleteProp slug={slug}/>
                             
                         </div>
                     </div>

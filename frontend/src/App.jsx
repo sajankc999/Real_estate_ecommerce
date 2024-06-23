@@ -46,7 +46,7 @@ function App() {
           <AddProperty/>
         </ProtectedRoutes>
       }/>
-      <Route path="/property/update/:id" element={
+      <Route path="/property/update/:slug" element={
       <ProtectedRoutes>
         <UpdateProperty/>
       </ProtectedRoutes>
