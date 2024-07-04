@@ -3,7 +3,7 @@ import api from '../api'
 import { Navigate } from "react-router-dom";
 import { jwtDecode  } from "jwt-decode";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from '../constants';
-import Feed from '../pages/Feed';
+
 export default function ProtectedRoutes({ children }) {
     const [isAuthorized, setIsAuthorized] = useState(null);
     useEffect(() => {

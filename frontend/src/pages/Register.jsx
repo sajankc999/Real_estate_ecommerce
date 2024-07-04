@@ -43,18 +43,21 @@ export default function Register() {
               'Content-Type': 'application/json',
             },
           }
-          ).then((response)=>console.log(response.data)).catch((error)=>alert(error.message))
+          ).then((res)=>{console.log(res.data);
           if(res.status===201){
   
-              navigate('/login')
-              
-          
-        }else{
-  
-          return <div class="alert alert-danger" role="alert">
-          passwords didnt match
-        </div>
-      }
+            navigate('/login')
+            
+        
+      }else{
+
+        return <div class="alert alert-danger" role="alert">
+        passwords didnt match
+      </div>
+    }
+        }
+        ).catch((error)=>alert(error.message))
+ 
 
         } catch (error) {
           console.log(error)

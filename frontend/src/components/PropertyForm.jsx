@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import api from '../api'
 export default function PropertyForm({ FormName }) {
-  const intialForm = Object.freeze({
+  
+  const [PropertyInfo, setInfo] = useState({
     title: '',
     description: '',
     price: '',
     is_negotiable: true,
-    is_available:true,
+    is_available: true,
     location: '',
-  });
-  const [PropertyInfo, setInfo] = useState(intialForm)
+    category:0
+  })
   const [image, setImage] = useState(null)
+  const propertyInfoRef = useRef(PropertyInfo);
 
+  useEffect(()=>{
+    propertyInfoRef.current = PropertyInfo;
+
+    console.log(PropertyInfo)},[PropertyInfo])
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -19,39 +25,48 @@ export default function PropertyForm({ FormName }) {
       setImage({ image: e.target.files, })
       // console.log(files[0])
     }
-    if ([name] == 'title' || [name]=='description') {
+    if([name]=='category'){
+      setInfo((prev)=> ({...prev,category:parseInt(value)}))
+      console.log(PropertyInfo.category)
+    }
+    if ([name] == 'title' || [name] == 'description') {
       setInfo((prev) => ({ ...prev, [name]: value.trim() }));
     } else {
-      setInfo((prev) => ({ ...prev,[name]: type === 'checkbox' ? e.target.checked : value }));
+      setInfo((prev) => ({ ...prev, [name]: type === 'checkbox' ? e.target.checked : value }));
 
     }
-  };
-  const FormHandle = async (e) => {
-    e.preventDefault()
     console.log(PropertyInfo)
-    let data = new FormData() 
-    data.append('image', image.image[0])
-    for (const key in PropertyInfo) {
-      data.append(key, PropertyInfo[key])
-    }
-    // data.append('seller',1)
-    // console.log(data.size)
-    for (var key of data.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-  }
-    
-    try {
-      const response =await api.post('/api/property/MyProperty/',data)
-      if(response.status===201){alert('property added')}
-      else{alert('error occurred')}
-
-    } catch (error) {
-      console.error(error)
-      alert('error occurred')
-    }
   };
 
 
+  const FormHandle = async (e) => {
+    e.preventDefault();
+    console.log(propertyInfoRef);
+    
+    let data = new FormData();
+    for (const key in propertyInfoRef.current) {
+      data.append(key, propertyInfoRef.current[key]);
+    }
+    data.append('image', image.image[0]);
+    
+    for (var key of data.entries()) {
+
+        console.log(key[0] + ', ' + key[1]);
+      
+    }
+    console.log(data)
+    try {
+      const response = await api.post('/api/property/MyProperty/', data);
+      if (response.status === 201) {
+        alert('property added');
+      } else {
+        alert('error occurred');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('error occurred');
+    }
+  };
   return (
     <div>
       <div className='container'>
@@ -62,7 +77,7 @@ export default function PropertyForm({ FormName }) {
                 {FormName}
               </h3>
               <div className="card-body py-md-4">
-                <form onSubmit={FormHandle}  encType="multipart/form-data">
+                <form onSubmit={FormHandle} encType="multipart/form-data">
                   <label htmlFor="title">title</label>
                   <div className='form-group'>
                     <input type="text"
@@ -88,6 +103,19 @@ export default function PropertyForm({ FormName }) {
                       onChange={handleChange}
                       required
                       placeholder="in NRP" className='form-control' />
+                  </div>
+
+
+                  <div className='form-group'>
+                    <label htmlFor="category">Category:</label>
+
+                    <select name="category" id="category"onChange={handleChange} typeof='number'>
+                      <option value='0'>Residential</option>
+                      <option value='1'>Commercial</option>
+                      <option value='2'>Industrial</option>
+                      <option value='3'>Land</option>
+                      <option value='4'>Governmental</option>
+                    </select>
                   </div>
 
                   <div className='form-group'>

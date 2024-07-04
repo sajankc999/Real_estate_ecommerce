@@ -58,7 +58,10 @@ export default function Feed() {
                 <FeedItem title={prop.title} 
                 description={prop.description} 
                 image={prop.image} 
-                price={prop.price} onclickFunc={()=>GotoPropertyDetail} btnName='learn more'/>
+                price={prop.price} 
+                is_available={prop.is_available}
+                is_negotiable={prop.is_negotiable}
+                onclickFunc={()=>GotoPropertyDetail} btnName='learn more'/>
               </div>
            )
           }

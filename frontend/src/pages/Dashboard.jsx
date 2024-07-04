@@ -27,26 +27,26 @@ export default function Dashboard() {
         <Link to ='/property/add'>
         <button style={
             {
-                top:'5%',
+                top:'3%',
                 left:'91%',
                 width:'85px',
                 height:'35px',
                 position: 'absolute',
                 zIndex: '2',
-                background: 'orange',
+                background: 'green',
                 }
         } type='button'>add
             </button>
             </Link>
 
         
-                <div cclassName='row row-cols-1 row-cols-md-2 g-4'>
+                <div className='row row-cols-1 row-cols-md-2 g-4'>
                     {
                         MyProperty.length!==0?(MyProperty.map((item) => {
                             return <div key={item.id}>
 
                                 <DashBoardItem
-                                    id ={item.id}
+                                    slug ={item.slug}
                                     title={item.title}
                                     description={item.description}
                                     image={item.image}

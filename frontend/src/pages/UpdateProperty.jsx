@@ -3,10 +3,10 @@ import api from '../api'
 import { useParams } from 'react-router-dom'
 
 function UpdateProperty() {
-  const {id} = useParams()
+  const {slug} = useParams()
   const [Prop,setProp]=useState([])
   const  getProp =async ()=>{
-    await api.get(`api/property/MyProperty/${id}/`)
+    await api.get(`api/property/MyProperty/${slug}/`)
     .then((res)=>{setProp(res.data)})
     .catch(err=>console.error(err))
 
@@ -18,6 +18,7 @@ function UpdateProperty() {
     is_negotiable: true,
     is_available: true,
     location: '',
+    category:0,
   });
 
   const [image, setImage] = useState(null)
@@ -25,7 +26,7 @@ function UpdateProperty() {
   useEffect(() => {
     const getProp = async () => {
       try {
-        const res = await api.get(`api/property/MyProperty/${id}/`);
+        const res = await api.get(`api/property/MyProperty/${slug}/`);
         setProp(res.data);
         setInfo(res.data); // Synchronize NewPropertyInfo with the fetched data
       } catch (err) {
@@ -34,7 +35,7 @@ function UpdateProperty() {
     };
 
     getProp();
-  }, [id]);
+  }, [slug]);
 
  
 
@@ -58,7 +59,7 @@ function UpdateProperty() {
     var data = new FormData() 
     data.append('image', image.image[0])
     for (const key in NewPropertyInfo) {
-      if(key!=='id'){
+      if(key!=='id'||'slug'){
 
         data.append(key, NewPropertyInfo[key])
       }
@@ -70,7 +71,7 @@ function UpdateProperty() {
   }
     
     try {
-      const response =await api.patch(`/api/property/MyProperty/${id}/`,data)
+      const response =await api.patch(`/api/property/MyProperty/${slug}/`,data)
       if(response.status===200){alert('property updated');}
       else{alert('error occurred')}
 
@@ -148,6 +149,19 @@ function UpdateProperty() {
 
                     />
                   </div>
+
+                  <div className='form-group'>
+                    <label htmlFor="category">Category:</label>
+
+                    <select name="category" id="category"onChange={handleChange} typeof='number'>
+                      <option value='0'>Residential</option>
+                      <option value='1'>Commercial</option>
+                      <option value='2'>Industrial</option>
+                      <option value='3'>Land</option>
+                      <option value='4'>Governmental</option>
+                    </select>
+                  </div>
+
 
                   <div className='form-group'>
                     <label htmlFor="image"  >image</label><br />
